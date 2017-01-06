@@ -51,6 +51,7 @@ public class JadeManager {
         System.out.println("Launching the rma agent on the main container ...");
         AgentController rma = null;
         try {
+            //Start the remote agent management GUI
             rma = mainContainer.createNewAgent("rma", "jade.tools.rma.rma", new Object[0]);
             rma.start();
 

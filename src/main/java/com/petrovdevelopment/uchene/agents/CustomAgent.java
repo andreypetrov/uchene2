@@ -1,5 +1,9 @@
 package com.petrovdevelopment.uchene.agents;
 
+import com.petrovdevelopment.uchene.resources.ResourcesCallback;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.wrapper.AgentContainer;
+
 /**
  * Created by Andrey Petrov on 17-01-06.
  */
@@ -22,18 +26,20 @@ public class CustomAgent extends jade.core.Agent {
         }
 
         // Add a suitable cyclic behaviour...
-        addBehaviour(new jade.core.behaviours.CyclicBehaviour() {
-
+        addBehaviour(new CyclicBehaviour() {
             public void action() {
                 // Retrieve the first object in the queue and print it on
                 // the standard output
                 Object obj = getO2AObject();
                 if (obj != null) {
                     System.out.println("Got an object from the queue: [" + obj + "]");
+                    if (obj instanceof AgentMessage) { //pass callback if needed
+                        AgentMessage agentMessage = (AgentMessage) obj;
+                        agentMessage.resourcesCallback.onResponse("Got an object from the queue with message: " + agentMessage.message);
+                    }
                 } else
                     block();
             }
-
         });
     }
 

@@ -3,6 +3,7 @@ package com.petrovdevelopment.uchene;
 /**
  * Created by Andrey Petrov on 16-12-19.
  */
+import com.petrovdevelopment.uchene.resources.Resources;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
