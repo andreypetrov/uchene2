@@ -43,6 +43,15 @@ public class CustomAgent extends jade.core.Agent {
         });
     }
 
+
+    public String writeToDataBase(String message) {
+        String response = null;
+
+        return response;
+    }
+
+
+
     public void takeDown() {
         // Disables the object-to-agent communication channel, thus
         // waking up all waiting threads

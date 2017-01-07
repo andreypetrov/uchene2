@@ -11,9 +11,7 @@ import jade.wrapper.AgentContainer;
  * Created by Andrey Petrov on 17-01-05.
  */
 public class JadeManager {
-    public static JadeManager instance;
-    public static Runtime runtime;
-    public static AgentContainer mainContainer;
+    private static JadeManager instance;
 
     public static JadeManager getInstance() {
         if (instance == null) {
@@ -21,6 +19,10 @@ public class JadeManager {
         }
         return instance;
     }
+
+
+    public static Runtime runtime;
+    public static AgentContainer mainContainer;
 
 
     public AgentController getAgent(String localAgentName) throws ControllerException{
