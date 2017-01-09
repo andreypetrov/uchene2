@@ -5,6 +5,7 @@ package com.petrovdevelopment.uchene.resources;
 
 import com.petrovdevelopment.uchene.JadeManager;
 import com.petrovdevelopment.uchene.agents.AgentMessage;
+import com.petrovdevelopment.uchene.db.SelectQueries;
 import jade.wrapper.ControllerException;
 import jade.wrapper.*;
 
@@ -56,5 +57,13 @@ public class Resources {
             e.printStackTrace();
             asyncResponse.resume(e.getStackTrace().toString());
         }
+    }
+
+    @GET
+    @Path("users")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUsers() {
+        SelectQueries.selectAllUsers();
+        return "users";
     }
 }
