@@ -4,6 +4,8 @@ package com.petrovdevelopment.uchene;
  * Created by Andrey Petrov on 16-12-19.
  */
 import com.petrovdevelopment.uchene.db.DatabaseManager;
+import com.petrovdevelopment.uchene.db.JacksonParser;
+import com.petrovdevelopment.uchene.db.SelectQueries;
 import com.petrovdevelopment.uchene.resources.Resources;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -13,6 +15,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         JadeManager.getInstance().initialize();
         DatabaseManager.getInstance().initialize();
+        JacksonParser.getInstance().initialize();
         initJetty();
     }
 

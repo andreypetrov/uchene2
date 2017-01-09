@@ -5,8 +5,6 @@ import java.util.List;
 /**
  * Created by Andrey Petrov on 17-01-09.
  */
-public class TestSection {
-    public int id;
-    public String description;
+public class TestSection extends Model {
     public List<Question> questions;
 }

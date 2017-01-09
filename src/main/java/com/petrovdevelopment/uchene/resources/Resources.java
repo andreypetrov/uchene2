@@ -6,6 +6,8 @@ package com.petrovdevelopment.uchene.resources;
 import com.petrovdevelopment.uchene.JadeManager;
 import com.petrovdevelopment.uchene.agents.AgentMessage;
 import com.petrovdevelopment.uchene.db.SelectQueries;
+import com.petrovdevelopment.uchene.model.Test;
+import com.petrovdevelopment.uchene.model.User;
 import jade.wrapper.ControllerException;
 import jade.wrapper.*;
 
@@ -63,7 +65,13 @@ public class Resources {
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUsers() {
-        SelectQueries.selectAllUsers();
-        return "users";
+        return SelectQueries.select(User.SELECT_ALL_USERS);
+    }
+
+    @GET
+    @Path("tests")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getTests() {
+        return SelectQueries.select(Test.SELECT_ALL_TESTS);
     }
 }
