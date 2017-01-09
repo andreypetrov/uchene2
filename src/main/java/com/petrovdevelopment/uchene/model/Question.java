@@ -6,7 +6,8 @@ import java.util.List;
  * Created by Andrey Petrov on 17-01-09.
  */
 public class Question extends Model {
-    public QuestionCategory questionCategory;
+    public String questionCategoryDescription;
+    public AnswerPool answerPool;
     public Answer correctAnswer;
     public List<Answer> answers;
 }

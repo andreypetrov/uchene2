@@ -1,9 +1,6 @@
 package com.petrovdevelopment.uchene.db;
 
-import com.petrovdevelopment.uchene.model.Question;
-import com.petrovdevelopment.uchene.model.Test;
-import com.petrovdevelopment.uchene.model.TestSection;
-import com.petrovdevelopment.uchene.model.User;
+import com.petrovdevelopment.uchene.model.*;
 
 import java.sql.*;
 import java.util.*;
@@ -78,40 +75,56 @@ public class SelectQueries {
         try {
             int previousTestId = -1;
             int previousTestSectionId = -1;
+            int previousQuestionId = -1;
+
             Test row = null;
             TestSection testSection = null;
+            Question question = null;
             while (resultSet.next()) {
+
                 int testId = resultSet.getInt(Test.ID);
                 //check if a new test has started
                 //this check is required because we have test id repetitions
                 if (previousTestId != testId) {
                     row = new Test();
-                    row.id = resultSet.getInt(Test.ID);
+                    row.id = testId;
                     row.description = resultSet.getString(Test.DESCRIPTION);
-                    list.add(row);
-                    previousTestId = testId;
                     row.testSections = new ArrayList<TestSection>();
+                    list.add(row);
 
                     previousTestId = testId;
                     previousTestSectionId = -1; //reset
+                    previousQuestionId = -1;    //reset
                 }
 
                 int testSectionId = resultSet.getInt(Test.TEST_SECTION_ID);
                 if (previousTestSectionId != testSectionId) {
                     testSection = new TestSection();
-                    testSection.id = resultSet.getInt(Test.TEST_SECTION_ID);
+                    testSection.id = testSectionId;
                     testSection.description = resultSet.getString(Test.TEST_SECTION_DESCRIPTION);
                     testSection.questions = new ArrayList<Question>();
+
                     previousTestSectionId = testSectionId;
                     row.testSections.add(testSection);
+                    previousQuestionId = -1; //reset
                 }
 
-                Question question = new Question();
-                question.id = resultSet.getInt(Test.QUESTION_ID);
-                question.description = resultSet.getString(Test.QUESTION_DESCRIPTION);
-                testSection.questions.add(question);
-            }
+                int questionId = resultSet.getInt(Test.QUESTION_ID);
+                if (previousQuestionId != questionId) {
+                    question = new Question();
+                    question.id = questionId;
+                    question.description = resultSet.getString(Test.QUESTION_DESCRIPTION);
+                    question.questionCategoryDescription = resultSet.getString(Test.QUESTION_CATEGORY_DESCRIPTION);
+                    question.answers = new ArrayList<Answer>();
 
+                    testSection.questions.add(question);
+                    previousQuestionId = questionId;
+                }
+                Answer answer = new Answer();
+                answer.id = resultSet.getInt(Test.ANSWER_ID);
+                answer.description = resultSet.getString(Test.ANSWER_DESCRIPTION);
+                question.answers.add(answer);
+            }
             result = JacksonParser.getInstance().toJson(list);
         } catch (SQLException e) {
             e.printStackTrace();

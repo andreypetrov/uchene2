@@ -13,7 +13,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        JadeManager.getInstance().initialize();
+        //JadeManager.getInstance().initialize();
         DatabaseManager.getInstance().initialize();
         JacksonParser.getInstance().initialize();
         initJetty();
