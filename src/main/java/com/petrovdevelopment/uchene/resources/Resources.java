@@ -71,7 +71,13 @@ public class Resources {
     @GET
     @Path("tests")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getTests() {
-        return SelectQueries.select(Test.SELECT_ALL_TESTS);
+    public String getTests(@QueryParam("testId") int testId,
+                           @QueryParam("studentId") int studentId) {
+        if (testId != 0 && studentId != 0) {
+            int[] inputParameters = {studentId, testId};
+            return SelectQueries.selectWithParameters(Test.SELECT_TEST_WITH_ANSWERS, inputParameters);
+        } else {
+            return SelectQueries.select(Test.SELECT_ALL_TESTS);
+        }
     }
 }

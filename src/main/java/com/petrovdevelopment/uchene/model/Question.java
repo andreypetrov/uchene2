@@ -7,6 +7,10 @@ import java.util.List;
  */
 public class Question extends Model {
     public String questionCategoryDescription;
+    public boolean isAnswered;
+    public int givenAnswerId;
+    public boolean isCorrect;
+
     public AnswerPool answerPool;
     public Answer correctAnswer;
     public List<Answer> answers;
