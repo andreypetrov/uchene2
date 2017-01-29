@@ -39,6 +39,35 @@ public class SelectQueries {
     }
 
 
+    public static PreparedStatement createUpdateTestResultAnswerFacts(int testId, int studentId, int questionId, int answerId) {
+
+    }
+
+
+    public static int updateQuery(PreparedStatement updateStatement) {
+        Connection connection = null;
+        try {
+            // create a database connection
+            connection = DriverManager.getConnection(DATABASE_CONNECTION);
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(QUERY_TIMEOUT);  // set timeout to 30 sec.
+            return updateStatement.executeUpdate();
+        } catch (SQLException e) {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                // connection close failed.
+                System.err.println(e);
+            }
+        }
+        return -1;
+    }
+
 //    public static PreparedStatement createStatement(String selectQuery, int studentId, int testId, Connection connection) throws SQLException {
 //        PreparedStatement statement = connection.prepareStatement(selectQuery);
 //        statement.setInt(1, studentId);
@@ -116,7 +145,6 @@ public class SelectQueries {
     private static String getTestWithAnswers(ResultSet resultSet) {
         String result = null;
 
-        List<Test> list = new ArrayList<Test>();
         try {
             int previousTestId = -1;
             int previousTestSectionId = -1;
@@ -132,7 +160,6 @@ public class SelectQueries {
                 //this check is required because we have test id repetitions
                 if (previousTestId != testId) {
                     test = createTest(resultSet);
-                    list.add(test);
                     previousTestId = testId;
                     previousTestSectionId = -1; //reset
                     previousQuestionId = -1;    //reset
@@ -154,7 +181,7 @@ public class SelectQueries {
                 }
                 question.answers.add(createAnswer(resultSet));
             }
-            result = JacksonParser.getInstance().toJson(list);
+            result = JacksonParser.getInstance().toJson(test);
         } catch (SQLException e) {
             e.printStackTrace();
         }
