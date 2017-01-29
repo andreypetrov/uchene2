@@ -38,10 +38,10 @@ public class SelectQueries {
         return result;
     }
 
-
-    public static PreparedStatement createUpdateTestResultAnswerFacts(int testId, int studentId, int questionId, int answerId) {
-
-    }
+//
+//    public static PreparedStatement createUpdateTestResultAnswerFacts(int testId, int studentId, int questionId, int answerId) {
+//
+//    }
 
 
     public static int updateQuery(PreparedStatement updateStatement) {
