@@ -1,1 +1,1 @@
-web: java -jar ./target/uchene2-1.0-SNAPSHOT.jar
+web: java -jar target/uchene2-1.0-SNAPSHOT.jar
