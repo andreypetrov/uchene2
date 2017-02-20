@@ -39,7 +39,7 @@ public class JettyManager {
 
     private static Handler createStaticResourcesHandler() {
         ResourceHandler staticResourceHandler = new ResourceHandler();
-        staticResourceHandler.setResourceBase("./public/");
+        staticResourceHandler.setResourceBase("./src/public/");
         ContextHandler staticContextHandler = new ContextHandler("/");
         staticContextHandler.setHandler(staticResourceHandler);
         return staticResourceHandler;
