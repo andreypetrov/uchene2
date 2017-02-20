@@ -19,7 +19,7 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 
-@Path("/entry-point")
+@Path("/rest")
 public class Resources {
 
     @GET
