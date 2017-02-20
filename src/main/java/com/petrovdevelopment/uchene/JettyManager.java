@@ -18,7 +18,7 @@ public class JettyManager {
 
     public static void initialize() throws Exception {
 
-        Server jettyServer = new Server(80);
+        Server jettyServer = new Server(8080);
         jettyServer.setHandler(createHandlers());
         try {
             jettyServer.start();
