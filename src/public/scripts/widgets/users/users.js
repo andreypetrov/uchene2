@@ -13,7 +13,7 @@ Backbone.widget({
 
     loadUsers: function(){
         this.ajaxRequest({
-            url: 'webservices/users.json',
+            url: 'rest/users',
             data: {},
             type: "GET",
             success: function (response) {

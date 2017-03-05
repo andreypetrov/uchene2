@@ -855,11 +855,6 @@ canvas{
     z-index: 99999;
 }
 
-#grid-container .exit{
-    background-image: url("../img/warp.png");
-    position: absolute;
-    z-index: 2;
-}
 
 .road-01{
     background: url("../img/tiles/road/road_01.jpg") no-repeat center center ;

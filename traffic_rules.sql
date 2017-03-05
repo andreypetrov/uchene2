@@ -121,7 +121,7 @@ INSERT INTO ROLE (ID, DESCRIPTION) VALUES (2, "Teacher");
 INSERT INTO ROLE (ID, DESCRIPTION) VALUES (3, "Student");
 
 INSERT INTO USER (ID, FIRST_NAME, LAST_NAME, IMAGE_URL, ROLE_ID, PASSWORD) VALUES (1, "Andrey", "Petrov", "http://lh3.googleusercontent.com/-bjgJUDNlFhM/AAAAAAAAAAI/AAAAAAAAAAA/AKB_U8vGzayOkjkrL9TY_lHaJMz0HRBvjQ/s64-c-mo/photo.jpg", 1, "parola");
-INSERT INTO USER (ID, FIRST_NAME, LAST_NAME, IMAGE_URL, ROLE_ID, PASSWORD) VALUES (2, "Aleksandar", "Petrov", NULL, 1, "parola");
+INSERT INTO USER (ID, FIRST_NAME, LAST_NAME, IMAGE_URL, ROLE_ID, PASSWORD) VALUES (2, "Aleksandar", "Petrov", "http://orig04.deviantart.net/b250/f/2009/330/e/8/smiley_face_avatar_by_pixeltwist.gif", 1, "parola");
 INSERT INTO USER (ID, FIRST_NAME, LAST_NAME, IMAGE_URL, ROLE_ID, PASSWORD) VALUES (3, "Учителко", "Учителков", NULL, 2, "parola");
 INSERT INTO USER (ID, FIRST_NAME, LAST_NAME, IMAGE_URL, ROLE_ID, PASSWORD) VALUES (4, "Йордан", "Илиев", NULL, 3, "parola");
 INSERT INTO USER (ID, FIRST_NAME, LAST_NAME, IMAGE_URL, ROLE_ID, PASSWORD) VALUES (5, "Теодор", "Стаматов", NULL, 3, NULL );

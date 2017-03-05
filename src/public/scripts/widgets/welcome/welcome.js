@@ -23,8 +23,8 @@ Backbone.widget({
         }
 
         this.ajaxRequest({
-            url: 'webservices/testForAGivenStudent.json',
-            data: {},
+            url: 'rest/tests?testId=1',
+            data: {studentId: this.playerData.id},
             type: "GET",
             success: function (response) {
                 this.model = response;
