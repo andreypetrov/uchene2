@@ -55,6 +55,10 @@
         {
           "src": "assets/img/tiles/buildings/monument.png",
           "label": "Monument"
+        },
+        {
+          "src": "assets/img/tiles/buildings/avtosvqt.png",
+          "label": "Avtosvqt"
         }
 
       ]
