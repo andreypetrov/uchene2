@@ -48,6 +48,7 @@ CREATE TABLE QUESTION_CATEGORY (
 CREATE TABLE QUESTION (
   ID INTEGER PRIMARY KEY        NOT NULL,
   DESCRIPTION        TEXT       NOT NULL,
+  IMAGE_URL TEXT,
   QUESTION_CATEGORY_ID        INTEGER    NOT NULL,
   ANSWER_POOL_ID     INTEGER    NOT NULL,
   CORRECT_ANSWER_ID  INTEGER    NOT NULL,
@@ -139,19 +140,13 @@ INSERT INTO ANSWER_POOL (ID, DESCRIPTION) VALUES (10, "ДА или НЕ");
 INSERT INTO QUESTION_CATEGORY (ID, DESCRIPTION) VALUES (1, "Кръстовище");
 INSERT INTO QUESTION_CATEGORY (ID, DESCRIPTION) VALUES (2, "Велосипед");
 
-INSERT INTO QUESTION (ID, DESCRIPTION, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (1, "Веригата на велосипеда:", 1, 2, 1);
-INSERT INTO QUESTION (ID, DESCRIPTION, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (2, "Веригата на велосипеда:", 1, 3, 4);
-INSERT INTO QUESTION (ID, DESCRIPTION, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (3, "Когато буташ велосипед, тогава според ЗДвП, ти си:", 1, 4, 6);
-INSERT INTO QUESTION (ID, DESCRIPTION, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (4, "Когато няма тротоар или банкет, или те не могат да бъдат използвани, тогава къде ще буташ велосипеда си?", 1, 5, 7);
-INSERT INTO QUESTION (ID, DESCRIPTION, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (5, "Може ли една ненапомпена гума да влияе на равновесието и на безопасното управление на велосипеда?", 2, 10, 11);
-INSERT INTO QUESTION (ID, DESCRIPTION, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (6, "Може ли нерегулирани добре седалка и кормило да влияят на равновесието и на безопасното управление на велосипеда?", 2, 10, 11);
-INSERT INTO QUESTION (ID, DESCRIPTION, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (7, "Може ли голям товар на багажника да влияе на равновесието и на безопасното управление на велосипеда?", 2, 10, 11);
+INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (1, "Какво означава този знак?", "sign_A25.png", 1, 1, 1);
 
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (1, "трябва да се обтяга периодично", 2);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (2, "трябва да се отпуска периодично", 2);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (3, "нито се обтяга, нито се отпуска", 2);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (4, "се смазва периодично", 3);
+INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (1, "Кръстовище на равнозначни пътища", 1);
+INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (2, "Кръстовище с път без предимство", 1);
+INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (3, "Кръстовище с път без предимство отляво", 1);
+INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (4, "Кръстовище с кръгово движение", 1);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (5, "не се смазва", 3);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (6, "велосипедист", 4);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (7, "пешеходец", 4);
@@ -191,6 +186,7 @@ SELECT t.*,
   ts.description TEST_SECTION_DESCRIPTION,
   q.id QUESTION_ID,
   q.description QUESTION_DESCRIPTION,
+  q.IMAGE_URL IMAGE_URL,
   a.id ANSWER_ID,
   a.description ANSWER_DESCRIPTION,
   qc.description QUESTION_CATEGORY_DESCRIPTION,
@@ -211,6 +207,5 @@ FROM TEST t
     ON q.QUESTION_CATEGORY_ID = qc.ID
   LEFT JOIN TEST_RESULT_ANSWERS_FACTS traf
     ON t.ID = traf.TEST_ID AND q.id = traf.QUESTION_ID AND traf.STUDENT_ID = 4
-  WHERE t.ID = 2
+WHERE t.ID = 2
 ORDER BY t.ID, TEST_SECTION_ID, q.id, a.id;
-

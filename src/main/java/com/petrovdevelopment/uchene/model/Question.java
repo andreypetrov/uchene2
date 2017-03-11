@@ -10,6 +10,7 @@ public class Question extends Model {
     public boolean isAnswered;
     public int givenAnswerId;
     public boolean isCorrect;
+    public String imageUrl;
 
     public AnswerPool answerPool;
     public Answer correctAnswer;

@@ -262,6 +262,7 @@ public class SelectQueries {
         question.id = resultSet.getInt(Test.QUESTION_ID);
         question.description = resultSet.getString(Test.QUESTION_DESCRIPTION);
         question.questionCategoryDescription = resultSet.getString(Test.QUESTION_CATEGORY_DESCRIPTION);
+        question.imageUrl = resultSet.getString(Test.IMAGE_URL);
         question.answers = new ArrayList<Answer>();
         return question;
     }
@@ -271,6 +272,7 @@ public class SelectQueries {
         question.id = resultSet.getInt(Test.QUESTION_ID);
         question.description = resultSet.getString(Test.QUESTION_DESCRIPTION);
         question.questionCategoryDescription = resultSet.getString(Test.QUESTION_CATEGORY_DESCRIPTION);
+        question.imageUrl = resultSet.getString(Test.IMAGE_URL);
         question.givenAnswerId = resultSet.getInt(Test.GIVEN_ANSWER);
         question.isAnswered = question.givenAnswerId != 0;
         question.isCorrect = resultSet.getBoolean(Test.IS_CORRECT);
