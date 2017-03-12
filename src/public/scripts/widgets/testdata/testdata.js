@@ -16,6 +16,15 @@ Backbone.widget({
             data: {},
             type: "GET",
             success: function (response) {
+
+                _.each(response[0].testSections, function(section){
+                    _.each(section.questions, function(question){
+                        if(question.imageUrl){
+                            question.imageUrl = 'assets/img/signs/' + question.imageUrl;
+                        }
+                    })
+                })
+
                 this.model = response[0];
                 this.render();
             }

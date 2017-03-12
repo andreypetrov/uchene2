@@ -1,37 +1,48 @@
-<div class="container questions-list">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1>{{ description }}</h1>
+<div class="questions-container">
+    <div class="container questions-list">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>{{ description }}</h1>
 
-            <table iterate="testSections" class="table table-striped" style="background:#dedede;">
-                <thead>
-                <tr>{{ description }}</tr>
-                <tr>
-                    <th>ID</th>
-                    <th>Въпрос</th>
-                    <th>Картинка</th>
-                    <th>Отговори</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr iterate="questions">
-                    <td>{{ id }}</td>
-                    <td>{{ description }}</td>
-                    <td>{{ questionCategoryDescription }}</td>
-                    <td><img src="{{ imageUrl }}"/></td>
-                    <td>
-                        <div iterate="answers">
-                            <span>{{ id }} : </span>{{ description }}
-                        </div>
-                    </td>
-                </tr>
+                <div class="section-container">
+                    <table iterate="testSections" class="table table-striped" style="background:#dedede;">
+                        <thead>
+                        <tr>
+                            <th colspan="4" class="section">{{ description }}</th>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th style="min-width: 140px;">Категория</th>
+                            <th>Въпрос</th>
+                            <th style="min-width: 500px;">Отговори</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr iterate="questions">
+                            <td>{{ id }}</td>
+                            <td>{{ questionCategoryDescription }}</td>
+                            <td>
+                                <div class="question">
+                                    {{ description }}
+                                    <br>
+                                    <img class="question-image" src="{{ imageUrl }}"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="correct-question" iterate="answers">
+                                    <span>{{ id }} : </span>{{ description }}
+                                </div>
+                            </td>
+                        </tr>
 
-                </tbody>
-            </table>
-
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 
 

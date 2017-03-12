@@ -1522,6 +1522,8 @@ canvas{
 }
 
 
+
+
 .question-image {
     max-width: 100px;
     max-height: 100px;
@@ -1537,4 +1539,44 @@ canvas{
 .questions-list .question-image {
     margin-top:10px;
     margin-left:0;
+}
+
+.questions-container {
+    background:#d0d0d0;
+}
+
+.questions-container h1 {
+    color: white;
+    background: #11424e;
+    padding: 25px;
+    border: 1px solid #ddd;
+    margin: 30px 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+}
+
+.questions-container .section {
+    background: #196375;
+    color: white;
+}
+
+.questions-container .section-container {
+    background: white;
+    padding: 15px;
+}
+
+.questions-container .correct-question {
+    background: #b9e8bf;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid #35b315;
+    margin-bottom: 5px;
+}
+
+.questions-container .question {
+    background: #e8e3b9;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid #ad9b20;
 }
