@@ -9,64 +9,7 @@ import java.util.*;
  * Created by Andrey Petrov on 17-01-09.
  */
 public class SelectQueries {
-    public static final String DATABASE_CONNECTION = "jdbc:sqlite:mate.db";
-    public static final int QUERY_TIMEOUT = 30;
 
-    public static String select(String selectQuery) {
-        String result = null;
-        Connection connection = null;
-        try {
-            // create a database connection
-            connection = DriverManager.getConnection(DATABASE_CONNECTION);
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(QUERY_TIMEOUT);  // set timeout to 30 sec.
-            ResultSet resultSet = statement.executeQuery(selectQuery);
-            result = convertResultSetToString(resultSet, selectQuery);
-        } catch (SQLException e) {
-            // if the error message is "out of memory",
-            // it probably means no database file is found
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e);
-            }
-        }
-        return result;
-    }
-
-//
-//    public static PreparedStatement createUpdateTestResultAnswerFacts(int testId, int studentId, int questionId, int answerId) {
-//
-//    }
-
-
-    public static int updateQuery(PreparedStatement updateStatement) {
-        Connection connection = null;
-        try {
-            // create a database connection
-            connection = DriverManager.getConnection(DATABASE_CONNECTION);
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(QUERY_TIMEOUT);  // set timeout to 30 sec.
-            return updateStatement.executeUpdate();
-        } catch (SQLException e) {
-            // if the error message is "out of memory",
-            // it probably means no database file is found
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e);
-            }
-        }
-        return -1;
-    }
 
 //    public static PreparedStatement createStatement(String selectQuery, int studentId, int testId, Connection connection) throws SQLException {
 //        PreparedStatement statement = connection.prepareStatement(selectQuery);
@@ -75,41 +18,8 @@ public class SelectQueries {
 //        return statement;
 //    }
 
-    public static String selectWithParameters(String selectQuery, int[] intInputParameters) {
-        String result = null;
-        Connection connection = null;
-        try {
-            // create a database connection
-            connection = DriverManager.getConnection(DATABASE_CONNECTION);
-            PreparedStatement statement = connection.prepareStatement(selectQuery);
 
-
-            if (intInputParameters != null) {
-                for (int i = 0; i < intInputParameters.length; i++) {
-                    statement.setInt(i + 1, intInputParameters[i]);
-                }
-            }
-
-            statement.setQueryTimeout(QUERY_TIMEOUT);  // set timeout to 30 sec.
-            ResultSet resultSet = statement.executeQuery();
-            result = convertResultSetToString(resultSet, selectQuery);
-        } catch (SQLException e) {
-            // if the error message is "out of memory",
-            // it probably means no database file is found
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                // connection close failed.
-                System.err.println(e);
-            }
-        }
-        return result;
-    }
-
-    private static String convertResultSetToString(ResultSet resultSet, String selectQuery) {
+    public static String convertResultSetToString(ResultSet resultSet, String selectQuery) {
         if (User.SELECT_ALL_USERS.equals(selectQuery)) {
             return getAllUsers(resultSet);
         } else if (Test.SELECT_ALL_TESTS.equals(selectQuery)) {
@@ -140,7 +50,6 @@ public class SelectQueries {
         }
         return result;
     }
-
 
     private static String getTestWithAnswers(ResultSet resultSet) {
         String result = null;

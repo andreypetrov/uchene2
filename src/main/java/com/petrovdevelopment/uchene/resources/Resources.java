@@ -5,22 +5,22 @@ package com.petrovdevelopment.uchene.resources;
 
 import com.petrovdevelopment.uchene.JadeManager;
 import com.petrovdevelopment.uchene.agents.AgentMessage;
+import com.petrovdevelopment.uchene.db.DatabaseManager;
 import com.petrovdevelopment.uchene.db.SelectQueries;
 import com.petrovdevelopment.uchene.model.Test;
+import com.petrovdevelopment.uchene.model.TestResultAnswersFacts;
 import com.petrovdevelopment.uchene.model.User;
 import jade.wrapper.ControllerException;
 import jade.wrapper.*;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 
 @Path("/rest")
 public class Resources {
+
 
     @GET
     @Path("test")
@@ -48,7 +48,7 @@ public class Resources {
         try {
             AgentController customAgent = JadeManager.getInstance().getAgent("customAgent");
             System.out.println("Inserting an object, asynchronously...");
-            customAgent.putO2AObject( new AgentMessage(message, new ResourcesCallback() {
+            customAgent.putO2AObject(new AgentMessage(message, new ResourcesCallback() {
                 @Override
                 public void onResponse(String message) {
                     asyncResponse.resume(message);
@@ -65,7 +65,7 @@ public class Resources {
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUsers() {
-        return SelectQueries.select(User.SELECT_ALL_USERS);
+        return DatabaseManager.select(User.SELECT_ALL_USERS);
     }
 
     @GET
@@ -75,9 +75,27 @@ public class Resources {
                            @QueryParam("studentId") int studentId) {
         if (testId != 0 && studentId != 0) {
             int[] inputParameters = {studentId, testId};
-            return SelectQueries.selectWithParameters(Test.SELECT_TEST_WITH_ANSWERS, inputParameters);
+            return DatabaseManager.selectWithParameters(Test.SELECT_TEST_WITH_ANSWERS, inputParameters);
         } else {
-            return SelectQueries.select(Test.SELECT_ALL_TESTS);
+            return DatabaseManager.select(Test.SELECT_ALL_TESTS);
         }
     }
+
+
+    @GET
+    @Path("answer")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String answer(@QueryParam("testId") int testId,
+                             @QueryParam("studentId") int studentId,
+                             @QueryParam("questionId") int questionId,
+                             @QueryParam("answerId") int answerId) {
+        if (testId != 0 && studentId != 0 && questionId != 0 && answerId != 0) {
+            int result = TestResultAnswersFacts.insert(testId, studentId, questionId, answerId);
+            return String.valueOf(result);
+        } else {
+            return "Please enter required parameters testId, studentId, questionId and answerId";
+        }
+
+    }
+
 }
