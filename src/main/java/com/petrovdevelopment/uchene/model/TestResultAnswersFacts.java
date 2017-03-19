@@ -2,8 +2,10 @@ package com.petrovdevelopment.uchene.model;
 
 import com.petrovdevelopment.uchene.db.DatabaseManager;
 import com.petrovdevelopment.uchene.db.Queries;
+import com.petrovdevelopment.uchene.db.converters.ResultSetConverterToString;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -42,4 +44,18 @@ public class TestResultAnswersFacts {
     public int answerId;
     public boolean isCorrect;
     public String datetime;
+
+    public static String getResultsByStudentId(int testId, int studentId) {
+        int[] parameters = {testId};
+        return DatabaseManager.selectWithParameters(Test.SELECT_QUESTIONS_COUNT, parameters, new ResultSetConverterToString() {
+            @Override
+            public String convertToString(ResultSet resultSet) throws SQLException {
+                return resultSet.getString(Test.QUESTIONS_COUNT);
+            }
+        });
+    }
+
+    public static String getResultsForAllStudents(int testId) {
+        return getResultsByStudentId(testId, 1);
+    }
 }

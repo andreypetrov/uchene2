@@ -116,4 +116,18 @@ public class Resources {
         }
     }
 
+    @GET
+    @Path("results")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String answer(@QueryParam("testId") int testId,
+                         @QueryParam("studentId") int studentId) {
+        if (testId == 0) return "Please specify test id";
+
+        if (studentId !=0 ) {
+            return TestResultAnswersFacts.getResultsByStudentId(testId, studentId);
+        } else {
+            return TestResultAnswersFacts.getResultsForAllStudents(testId);
+        }
+    }
+
 }
