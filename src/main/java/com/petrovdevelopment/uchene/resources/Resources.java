@@ -106,7 +106,7 @@ public class Resources {
         if (studentId !=0 ) {
             return UserResults.getResultsByStudentId(testId, studentId).toString();
         } else {
-            return UserResults.getResultsForAllStudents(testId).toString();
+            return stringify(UserResults.getResultsForAllStudents(testId));
         }
     }
 

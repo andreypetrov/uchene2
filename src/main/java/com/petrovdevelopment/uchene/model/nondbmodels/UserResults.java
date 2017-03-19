@@ -9,6 +9,7 @@ import com.petrovdevelopment.uchene.model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,7 +70,12 @@ public class UserResults extends Model {
 
     public static List<UserResults> getResultsForAllStudents(int testId) {
         List<User> users = User.getAll();
-        return null;
-      //  return getResultsByStudentId(testId, 1);
+        List<UserResults> list = new ArrayList<UserResults>();
+        for (User user : users) {
+            UserResults userResults = getResultsByStudentId(testId, user.id);
+            list.add(userResults);
+        }
+
+        return list;
     }
 }
