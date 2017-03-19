@@ -157,9 +157,9 @@ INSERT INTO QUESTION_CATEGORY (ID, DESCRIPTION) VALUES (3, "Пътни знац�
 
 
 INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (1, "Какво означава този знак?", "sign_A25.png", 3, 1, 1);
-INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (2, "Какво означава този знак?", "sign_A26.png", 3, 2, 5);
-INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (3, "Какво означава този знак?", "sign_A27.png", 3, 3, 9);
-INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (4, "Какво означава този знак?", "sign_A28.png", 3, 4, 13);
+INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (2, "Какво означава този знак?", "sign_A26.png", 3, 1, 3);
+INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (3, "Какво означава този знак?", "sign_A27.png", 3, 1, 5);
+INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (4, "Какво означава този знак?", "sign_A28.png", 3, 1, 4);
 INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (5, "Какво означава този знак?", "sign_A29.png", 3, 5, 17);
 INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (6, "Какво означава този знак?", "sign_B1.png", 3, 6, 21);
 INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_POOL_ID, CORRECT_ANSWER_ID) VALUES (7, "Какво означава този знак?", "sign_B2.png", 3, 7, 25);
@@ -199,48 +199,20 @@ INSERT INTO QUESTION (ID, DESCRIPTION, IMAGE_URL, QUESTION_CATEGORY_ID, ANSWER_P
 
 
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (1, "Кръстовище на равнозначни пътища", 1);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (2, "Кръстовище с път без предимство", 1);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (3, "Кръстовище с път без предимство отляво", 1);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (4, "Кръстовище с кръгово движение", 1);
+INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (2, "Кръстовище с кръгово движение", 1);
+INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (3, "Кръстовище с път без предимство", 1);
+INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (4, "Кръстовище с път без предимство отляво", 1);
+INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (5, "Кръстовище с път без предимство отдясно", 1);
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (5, "Кръстовище с път без предимство", 2);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (6, "Кръстовище на равнозначни пътища", 2);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (7, "Кръстовище с път без предимство отляво", 2);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (8, "Кръстовище с кръгово движение", 2);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (9, "Кръстовище с път без предимство отдясно", 3);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (10, "Кръстовище на равнозначни пътища", 3);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (11, "Кръстовище с път без предимство отляво", 3);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (12, "Кръстовище с кръгово движение", 3);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (13, "Кръстовище с път без предимство отляво", 4);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (14, "Кръстовище на равнозначни пътища", 4);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (15, "Кръстовище с път без предимство отдясно", 4);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (16, "Кръстовище с кръгово движение", 4);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (17, "Кръстовище с кръгово движение", 5);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (18, "Кръстовище на равнозначни пътища", 5);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (19, "Кръстовище с път без предимство отдясно", 5);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (20, "Кръстовище с път без предимство отляво", 5);
 
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (21, "Пропусни движещите се по пътя с предимство", 6);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (22, "Кръстовище с кръгово движение", 6);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (23, "Път с предимство", 6);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (24, "Край на пътя с предимство", 6);
 
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (25, "Спри! Пропусни движещите се по пътя с предимство", 7);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (26, "Кръстовище с път без предимство отляво", 7);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (27, "Път с предимство", 7);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (28, "Край на пътя с предимство", 7);
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (29, "Път с предимство", 8);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (30, "Спри! Пропусни движещите се по пътя с предимство", 8);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (31, "Стоп", 8);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (32, "Край на пътя с предимство", 8);
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (33, "Край на пътя с предимство", 9);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (34, "Спри! Пропусни движещите се по пътя с предимство", 9);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (35, "Път с предимство", 9);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (36, "Кръстовище на равнозначни пътища", 9);
 
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (37, "Внимание! Спри!", 10);
@@ -251,8 +223,7 @@ INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (40, "Премина
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (41, "Да", 11);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (42, "Не", 11);
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (43, "Да", 12);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (44, "Не", 12);
+
 
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (45, "Преминаването е разрешено", 13);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (46, "Внимание! Спри!", 13);
@@ -262,14 +233,6 @@ INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (48, "Червен",
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (49, "Жълт", 14);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (50, "Зелен", 14);
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (51, "Зелен", 15);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (52, "Жълт", 15);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (53, "Червен", 15);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (54, "Завиване наляво", 16);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (55, "Завиване надясно", 16);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (56, "Спиране", 16);
-
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (57, "Завиване надясно", 17);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (58, "Завиване наляво", 17);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (59, "Спиране", 17);
@@ -278,14 +241,6 @@ INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (60, "Ще сляз�
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (61, "Ще го направя качен на велосипед", 18);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (62, "Ще сляза от велосипеда и ще го бутам по платното", 18);
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (63, "Да", 19);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (64, "Не", 19);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (65, "Да", 20);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (66, "Не", 20);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (67, "Да", 21);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (68, "Не", 21);
 
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (69, "Пешеходец", 22);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (70, "Велосипедист", 22);
@@ -300,49 +255,10 @@ INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (75, "Нито се 
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (76, "Се смазва периодично", 25);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (77, "Не се смазва", 25);
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (78, "Да", 26);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (79, "Не", 26);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (80, "Да", 27);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (81, "Не", 27);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (82, "Да", 28);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (83, "Не", 28);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (84, "Да", 29);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (85, "Не", 29);
-
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (86, "Забранено е влизането на ППС", 30);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (87, "Забранено е влизането на ППС в двете посоки", 30);
 INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (89, "Позволено е влизането на ППС", 30);
 
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (90, "Забранено е влизането на ППС в двете посоки", 31);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (91, "Забранено е влизането на ППС", 31);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (92, "Позволено е влизането на ППС", 31);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (93, "Не", 32);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (94, "Да", 32);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (95, "Не", 33);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (96, "Да", 33);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (97, "Не", 34);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (98, "Да", 34);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (99, "Не", 35);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (100, "Да", 35);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (101, "Не", 36);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (102, "Да", 36);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (103, "Не", 37);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (104, "Да", 37);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (105, "Не", 38);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (106, "Да", 38);
-
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (107, "Не", 39);
-INSERT INTO ANSWER (ID, DESCRIPTION, ANSWER_POOL_ID) VALUES (108, "Да", 39);
 
 INSERT INTO TEST (ID, DESCRIPTION, TEACHER_ID) VALUES  (1, "Тест за движение по пътищата", 3);
 
