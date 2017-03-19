@@ -6,6 +6,6 @@ import java.sql.SQLException;
 /**
  * Created by Andrey Petrov on 17-03-19.
  */
-public interface ResultSetConverterToString {
-    String convert(ResultSet resultSet) throws SQLException;
+public interface ResultSetConverterToInt {
+    int convert(ResultSet resultSet) throws SQLException;
 }

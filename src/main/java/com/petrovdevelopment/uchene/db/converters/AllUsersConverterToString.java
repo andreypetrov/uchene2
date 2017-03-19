@@ -14,7 +14,7 @@ import java.util.List;
 public class AllUsersConverterToString implements ResultSetConverterToString {
 
     @Override
-    public String convertToString(ResultSet resultSet) {
+    public String convert(ResultSet resultSet) {
         String result = null;
         List<User> list = new ArrayList<User>();
         try {

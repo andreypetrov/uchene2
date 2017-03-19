@@ -69,7 +69,7 @@ public class Question extends Model {
         final String query = Queries.SELECT_ALL_FROM_PREFIX + TABLE;
         return DatabaseManager.select(query, new ResultSetConverterToString() {
             @Override
-            public String convertToString(ResultSet resultSet) throws SQLException {
+            public String convert(ResultSet resultSet) throws SQLException {
                 String result = null;
                 List<Question> list = new ArrayList<Question>();
                 try {
@@ -91,7 +91,7 @@ public class Question extends Model {
         int[] idArray = {questionId};
         return (Question) DatabaseManager.selectWithParameters(query, idArray, new ResultSetConverterToModel() {
             @Override
-            public Model convertToModel(ResultSet resultSet) throws SQLException {
+            public Question convert(ResultSet resultSet) throws SQLException {
                 Question question = createQuestionWithCorrectAnswerRevealed(resultSet);
                 return question;
             }

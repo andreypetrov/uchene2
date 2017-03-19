@@ -9,5 +9,5 @@ import java.sql.SQLException;
  * Created by Andrey Petrov on 17-03-19.
  */
 public interface ResultSetConverterToModel {
-    Model convertToModel(ResultSet resultSet) throws SQLException;
+    Model convert(ResultSet resultSet) throws SQLException;
 }

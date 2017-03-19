@@ -45,17 +45,4 @@ public class TestResultAnswersFacts {
     public boolean isCorrect;
     public String datetime;
 
-    public static String getResultsByStudentId(int testId, int studentId) {
-        int[] parameters = {testId};
-        return DatabaseManager.selectWithParameters(Test.SELECT_QUESTIONS_COUNT, parameters, new ResultSetConverterToString() {
-            @Override
-            public String convertToString(ResultSet resultSet) throws SQLException {
-                return resultSet.getString(Test.QUESTIONS_COUNT);
-            }
-        });
-    }
-
-    public static String getResultsForAllStudents(int testId) {
-        return getResultsByStudentId(testId, 1);
-    }
 }

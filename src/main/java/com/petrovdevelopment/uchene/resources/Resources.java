@@ -13,6 +13,7 @@ import com.petrovdevelopment.uchene.model.Question;
 import com.petrovdevelopment.uchene.model.Test;
 import com.petrovdevelopment.uchene.model.TestResultAnswersFacts;
 import com.petrovdevelopment.uchene.model.User;
+import com.petrovdevelopment.uchene.model.nondbmodels.UserResults;
 import jade.wrapper.ControllerException;
 import jade.wrapper.*;
 
@@ -124,9 +125,9 @@ public class Resources {
         if (testId == 0) return "Please specify test id";
 
         if (studentId !=0 ) {
-            return TestResultAnswersFacts.getResultsByStudentId(testId, studentId);
+            return UserResults.getResultsByStudentId(testId, studentId);
         } else {
-            return TestResultAnswersFacts.getResultsForAllStudents(testId);
+            return UserResults.getResultsForAllStudents(testId);
         }
     }
 

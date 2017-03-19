@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class TestWithAnswersConverterToString implements ResultSetConverterToString {
     @Override
-    public String convertToString(ResultSet resultSet) {
+    public String convert(ResultSet resultSet) {
         String result = null;
         try {
             int previousTestId = -1;

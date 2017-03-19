@@ -18,7 +18,7 @@ import java.util.List;
 public class AllTestsWithSubsectionsConverterToString implements ResultSetConverterToString {
 
     @Override
-    public String convertToString(ResultSet resultSet) {
+    public String convert(ResultSet resultSet) {
         String result = null;
 
         List<Test> list = new ArrayList<Test>();
