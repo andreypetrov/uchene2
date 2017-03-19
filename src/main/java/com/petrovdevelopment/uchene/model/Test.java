@@ -44,7 +44,6 @@ public class Test extends Model {
                     "ORDER BY t.ID, TEST_SECTION_ID, q.id, a.id";
 
 
-    //get all users, and for every user add their role field from the role table
    public static final String SELECT_ALL_TESTS =
             "SELECT t.*, " +
                     "ts.id TEST_SECTION_ID, " +

@@ -34,7 +34,7 @@ public class AllTestsWithSubsectionsConverterToString implements ResultSetConver
                 int testId = resultSet.getInt(Test.ID);
                 //check if a new test has started
                 //this check is required because we have test id repetitions
-                if (previousTestId != testId) {
+                if (previousTestId != testId && testId != 0) {
                     test = new Test(resultSet);
                     list.add(test);
                     previousTestId = testId;
@@ -43,7 +43,7 @@ public class AllTestsWithSubsectionsConverterToString implements ResultSetConver
                 }
 
                 int testSectionId = resultSet.getInt(Test.TEST_SECTION_ID);
-                if (previousTestSectionId != testSectionId) {
+                if (previousTestSectionId != testSectionId && testSectionId != 0) {
                     testSection = TestSection.createTestSectionForTest(resultSet);
                     previousTestSectionId = testSectionId;
                     test.testSections.add(testSection);
@@ -51,12 +51,11 @@ public class AllTestsWithSubsectionsConverterToString implements ResultSetConver
                 }
 
                 int questionId = resultSet.getInt(Test.QUESTION_ID);
-                if (previousQuestionId != questionId) {
+                if (previousQuestionId != questionId  && questionId != 0) {
                     question = Question.createQuestionForTest(resultSet);
                     testSection.questions.add(question);
                     previousQuestionId = questionId;
                 }
-                question.answers.add(Answer.createAnswerForTest(resultSet));
             }
             result = JacksonParser.getInstance().toJson(list);
         } catch (SQLException e) {

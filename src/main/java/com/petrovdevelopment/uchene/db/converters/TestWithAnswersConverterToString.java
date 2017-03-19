@@ -29,7 +29,7 @@ public class TestWithAnswersConverterToString implements ResultSetConverterToStr
                 int testId = resultSet.getInt(Test.ID);
                 //check if a new test has started
                 //this check is required because we have test id repetitions
-                if (previousTestId != testId) {
+                if (previousTestId != testId && testId != 0) {
                     test = new Test(resultSet);
                     previousTestId = testId;
                     previousTestSectionId = -1; //reset
@@ -37,7 +37,7 @@ public class TestWithAnswersConverterToString implements ResultSetConverterToStr
                 }
 
                 int testSectionId = resultSet.getInt(Test.TEST_SECTION_ID);
-                if (previousTestSectionId != testSectionId) {
+                if (previousTestSectionId != testSectionId && testSectionId != 0) {
                     testSection = TestSection.createTestSectionForTest(resultSet);
                     test.testSections.add(testSection);
                     previousTestSectionId = testSectionId;
@@ -45,7 +45,7 @@ public class TestWithAnswersConverterToString implements ResultSetConverterToStr
                 }
 
                 int questionId = resultSet.getInt(Test.QUESTION_ID);
-                if (previousQuestionId != questionId) {
+                if (previousQuestionId != questionId && questionId != 0) {
                     question = Question.createQuestionWithAnswersForTest(resultSet);
                     testSection.questions.add(question);
                     previousQuestionId = questionId;
