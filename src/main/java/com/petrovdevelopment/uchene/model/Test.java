@@ -1,18 +1,23 @@
 package com.petrovdevelopment.uchene.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Andrey Petrov on 17-01-09.
  */
 public class Test extends Model {
+    public static String TABLE  = "TEST";
+
     public static final String SELECT_TEST_WITH_ANSWERS =
             "SELECT t.*, " +
                     "ts.id TEST_SECTION_ID, " +
                     "ts.description TEST_SECTION_DESCRIPTION, " +
                     "q.id QUESTION_ID, " +
                     "q.description QUESTION_DESCRIPTION, " +
-                    "q.IMAGE_URL IMAGE_URL, " +
+                    "q.IMAGE_URL QUESTION_IMAGE_URL, " +
                     "a.id ANSWER_ID, " +
                     "a.description ANSWER_DESCRIPTION, " +
                     "qc.description QUESTION_CATEGORY_DESCRIPTION, " +
@@ -45,7 +50,7 @@ public class Test extends Model {
                     "ts.description TEST_SECTION_DESCRIPTION, " +
                     "q.id QUESTION_ID, " +
                     "q.description QUESTION_DESCRIPTION, " +
-                    "q.IMAGE_URL IMAGE_URL, " +
+                    "q.IMAGE_URL QUESTION_IMAGE_URL, " +
                     "a.id ANSWER_ID, " +
                     "a.description ANSWER_DESCRIPTION, " +
                     "qc.description QUESTION_CATEGORY_DESCRIPTION " +
@@ -69,7 +74,7 @@ public class Test extends Model {
     public static final String  TEST_SECTION_DESCRIPTION = "TEST_SECTION_DESCRIPTION";
     public static final String  QUESTION_ID = "QUESTION_ID";
     public static final String  QUESTION_DESCRIPTION = "QUESTION_DESCRIPTION";
-    public static final String  IMAGE_URL = "IMAGE_URL";
+    public static final String  QUESTION_IMAGE_URL = "QUESTION_IMAGE_URL";
     public static final String  ANSWER_ID = "ANSWER_ID";
     public static final String  ANSWER_DESCRIPTION = "ANSWER_DESCRIPTION";
     public static final String  QUESTION_CATEGORY_DESCRIPTION = "QUESTION_CATEGORY_DESCRIPTION";
@@ -78,5 +83,9 @@ public class Test extends Model {
 
     public List<TestSection> testSections;
 
-
+    public Test (ResultSet resultSet) throws SQLException {
+        id = resultSet.getInt(Test.ID);
+        description = resultSet.getString(Test.DESCRIPTION);
+        testSections = new ArrayList<TestSection>();
+    }
 }

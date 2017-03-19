@@ -1,6 +1,7 @@
 package com.petrovdevelopment.uchene.model;
 
 import com.petrovdevelopment.uchene.db.DatabaseManager;
+import com.petrovdevelopment.uchene.db.Queries;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -9,11 +10,14 @@ import java.sql.SQLException;
  * Created by Andrey Petrov on 17-01-09.
  */
 public class TestResultAnswersFacts {
-    public static String INSERT = "INSERT INTO TEST_RESULT_ANSWERS_FACTS"
+    public static String TABLE  = "TEST_RESULT_ANSWERS_FACTS";
+    public static String SELECT = Queries.SELECT_ALL_FROM_PREFIX + TABLE;
+
+    public static String INSERT = Queries.INSERT_INTO_PREFIX + TABLE
             + "(TEST_ID, STUDENT_ID, QUESTION_ID, ANSWER_ID, IS_CORRECT, DATETIME) VALUES"
             + "(?,?,?,?,?,DateTime('now'))";
 
-    public static String SELECT = "Select * from TEST_RESULT_ANSWERS_FACTS";
+
 
 
     public static int insert(int testId, int studentId, int questionId, int answerId) {

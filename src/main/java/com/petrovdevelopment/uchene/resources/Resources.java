@@ -6,7 +6,10 @@ package com.petrovdevelopment.uchene.resources;
 import com.petrovdevelopment.uchene.JadeManager;
 import com.petrovdevelopment.uchene.agents.AgentMessage;
 import com.petrovdevelopment.uchene.db.DatabaseManager;
-import com.petrovdevelopment.uchene.db.SelectQueries;
+import com.petrovdevelopment.uchene.db.converters.AllTestsWithSubsectionsConverterToString;
+import com.petrovdevelopment.uchene.db.converters.AllUsersConverterToString;
+import com.petrovdevelopment.uchene.db.converters.TestWithAnswersConverterToString;
+import com.petrovdevelopment.uchene.model.Question;
 import com.petrovdevelopment.uchene.model.Test;
 import com.petrovdevelopment.uchene.model.TestResultAnswersFacts;
 import com.petrovdevelopment.uchene.model.User;
@@ -20,6 +23,10 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/rest")
 public class Resources {
+    public static AllTestsWithSubsectionsConverterToString allTestsWithSubsectionsConverter = new AllTestsWithSubsectionsConverterToString();
+    public static AllUsersConverterToString allUsersConverter = new AllUsersConverterToString();
+    public static TestWithAnswersConverterToString testWithAnswersConverter = new TestWithAnswersConverterToString();
+
 
 
     @GET
@@ -65,7 +72,7 @@ public class Resources {
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUsers() {
-        return DatabaseManager.select(User.SELECT_ALL_USERS);
+        return DatabaseManager.select(User.SELECT_ALL_USERS_WITH_ROLES, allUsersConverter);
     }
 
     @GET
@@ -75,9 +82,9 @@ public class Resources {
                            @QueryParam("studentId") int studentId) {
         if (testId != 0 && studentId != 0) {
             int[] inputParameters = {studentId, testId};
-            return DatabaseManager.selectWithParameters(Test.SELECT_TEST_WITH_ANSWERS, inputParameters);
+            return DatabaseManager.selectWithParameters(Test.SELECT_TEST_WITH_ANSWERS, inputParameters, testWithAnswersConverter);
         } else {
-            return DatabaseManager.select(Test.SELECT_ALL_TESTS);
+            return DatabaseManager.select(Test.SELECT_ALL_TESTS, allTestsWithSubsectionsConverter);
         }
     }
 
@@ -96,6 +103,18 @@ public class Resources {
             return "Please enter required parameters testId, studentId, questionId and answerId";
         }
 
+    }
+
+
+    @GET
+    @Path("questions")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String answer(@QueryParam("questionId") int questionId) {
+        if (questionId != 0) {
+            return Question.getById(questionId).toString();
+        } else {
+            return Question.getAll();
+        }
     }
 
 }
