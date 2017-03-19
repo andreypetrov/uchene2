@@ -52,6 +52,7 @@ public class Question extends Model {
         question.questionCategoryDescription = resultSet.getString(Test.QUESTION_CATEGORY_DESCRIPTION);
         question.imageUrl = resultSet.getString(Test.QUESTION_IMAGE_URL);
         question.correctAnswerId = resultSet.getInt(Test.QUESTION_CORRECT_ANSWER_ID);
+        question.answers = new ArrayList<Answer>();
         return question;
     }
 
