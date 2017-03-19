@@ -1,7 +1,12 @@
 package com.petrovdevelopment.uchene.model;
 
+import com.petrovdevelopment.uchene.db.DatabaseManager;
+import com.petrovdevelopment.uchene.db.converters.ResultSetConverterToModelList;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andrey Petrov on 17-01-09.
@@ -38,5 +43,23 @@ public class User extends Model {
         user.role = resultSet.getString(User.ROLE);
         user.imageUrl = resultSet.getString(User.IMAGE_URL);
         return user;
+    }
+
+    public static List<User> getAll() {
+        return DatabaseManager.select(User.SELECT_ALL_USERS_WITH_ROLES, new ResultSetConverterToModelList<User>() {
+            @Override
+            public List<User> convert(ResultSet resultSet) {
+                List<User> list = new ArrayList<User>();
+                try {
+                    while (resultSet.next()) {
+                        User user = User.createUserWithRole(resultSet);
+                        list.add(user);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return list;
+            }
+        });
     }
 }

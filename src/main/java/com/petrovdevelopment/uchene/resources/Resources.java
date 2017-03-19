@@ -5,10 +5,7 @@ package com.petrovdevelopment.uchene.resources;
 
 import com.petrovdevelopment.uchene.JadeManager;
 import com.petrovdevelopment.uchene.agents.AgentMessage;
-import com.petrovdevelopment.uchene.db.DatabaseManager;
-import com.petrovdevelopment.uchene.db.converters.AllTestsWithSubsectionsConverterToString;
-import com.petrovdevelopment.uchene.db.converters.AllUsersConverterToString;
-import com.petrovdevelopment.uchene.db.converters.TestWithAnswersConverterToString;
+import com.petrovdevelopment.uchene.db.JacksonParser;
 import com.petrovdevelopment.uchene.model.Question;
 import com.petrovdevelopment.uchene.model.Test;
 import com.petrovdevelopment.uchene.model.TestResultAnswersFacts;
@@ -21,14 +18,14 @@ import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/rest")
 public class Resources {
-    public static AllTestsWithSubsectionsConverterToString allTestsWithSubsectionsConverter = new AllTestsWithSubsectionsConverterToString();
-    public static AllUsersConverterToString allUsersConverter = new AllUsersConverterToString();
-    public static TestWithAnswersConverterToString testWithAnswersConverter = new TestWithAnswersConverterToString();
 
-
+    public static String stringify(List list) {
+        return JacksonParser.getInstance().toJson(list);
+    }
 
     @GET
     @Path("test")
@@ -73,7 +70,7 @@ public class Resources {
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUsers() {
-        return DatabaseManager.select(User.SELECT_ALL_USERS_WITH_ROLES, allUsersConverter);
+        return stringify(User.getAll());
     }
 
     @GET
@@ -82,28 +79,10 @@ public class Resources {
     public String getTests(@QueryParam("testId") int testId,
                            @QueryParam("studentId") int studentId) {
         if (testId != 0 && studentId != 0) {
-            int[] inputParameters = {studentId, testId};
-            return DatabaseManager.selectWithParameters(Test.SELECT_TEST_WITH_ANSWERS, inputParameters, testWithAnswersConverter);
+            return Test.getAllWithAnswers(studentId, testId).toString();
         } else {
-            return DatabaseManager.select(Test.SELECT_ALL_TESTS, allTestsWithSubsectionsConverter);
+            return stringify(Test.getAll());
         }
-    }
-
-
-    @GET
-    @Path("giveAnswer")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String answer(@QueryParam("testId") int testId,
-                             @QueryParam("studentId") int studentId,
-                             @QueryParam("questionId") int questionId,
-                             @QueryParam("answerId") int answerId) {
-        if (testId != 0 && studentId != 0 && questionId != 0 && answerId != 0) {
-            int result = TestResultAnswersFacts.insert(testId, studentId, questionId, answerId);
-            return String.valueOf(result);
-        } else {
-            return "Please enter required parameters testId, studentId, questionId and answerId";
-        }
-
     }
 
     @GET
@@ -113,7 +92,7 @@ public class Resources {
         if (questionId != 0) {
             return Question.getById(questionId).toString();
         } else {
-            return Question.getAll();
+            return stringify(Question.getAll());
         }
     }
 
@@ -125,10 +104,35 @@ public class Resources {
         if (testId == 0) return "Please specify test id";
 
         if (studentId !=0 ) {
-            return UserResults.getResultsByStudentId(testId, studentId);
+            return UserResults.getResultsByStudentId(testId, studentId).toString();
         } else {
-            return UserResults.getResultsForAllStudents(testId);
+            return UserResults.getResultsForAllStudents(testId).toString();
         }
     }
 
+
+
+    @GET
+    @Path("giveAnswer")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String answer(@QueryParam("testId") int testId,
+                         @QueryParam("studentId") int studentId,
+                         @QueryParam("questionId") int questionId,
+                         @QueryParam("answerId") int answerId) {
+        if (testId != 0 && studentId != 0 && questionId != 0 && answerId != 0) {
+            int result = TestResultAnswersFacts.insert(testId, studentId, questionId, answerId);
+            return String.valueOf(result);
+        } else {
+            return "Please enter required parameters testId, studentId, questionId and answerId";
+        }
+    }
+    @POST
+    @Path("giveAnswer")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String answerPost(@QueryParam("testId") int testId,
+                         @QueryParam("studentId") int studentId,
+                         @QueryParam("questionId") int questionId,
+                         @QueryParam("answerId") int answerId) {
+        return answer(testId, studentId, questionId, answerId);
+    }
 }

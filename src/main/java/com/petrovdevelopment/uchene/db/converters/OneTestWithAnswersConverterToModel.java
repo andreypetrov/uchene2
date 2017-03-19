@@ -8,35 +8,27 @@ import com.petrovdevelopment.uchene.model.TestSection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Andrey Petrov on 17-03-19.
  */
-
-public class AllTestsWithSubsectionsConverterToString implements ResultSetConverterToString {
-
+public class OneTestWithAnswersConverterToModel implements ResultSetConverterToModel<Test> {
     @Override
-    public String convert(ResultSet resultSet) {
-        String result = null;
-
-        List<Test> list = new ArrayList<Test>();
+    public Test convert(ResultSet resultSet) {
+        Test result = null;
         try {
             int previousTestId = -1;
             int previousTestSectionId = -1;
             int previousQuestionId = -1;
-
-            Test test = null;
             TestSection testSection = null;
             Question question = null;
             while (resultSet.next()) {
+
                 int testId = resultSet.getInt(Test.ID);
                 //check if a new test has started
                 //this check is required because we have test id repetitions
                 if (previousTestId != testId && testId != 0) {
-                    test = new Test(resultSet);
-                    list.add(test);
+                    result = new Test(resultSet);
                     previousTestId = testId;
                     previousTestSectionId = -1; //reset
                     previousQuestionId = -1;    //reset
@@ -45,19 +37,23 @@ public class AllTestsWithSubsectionsConverterToString implements ResultSetConver
                 int testSectionId = resultSet.getInt(Test.TEST_SECTION_ID);
                 if (previousTestSectionId != testSectionId && testSectionId != 0) {
                     testSection = TestSection.createTestSectionForTest(resultSet);
+                    result.testSections.add(testSection);
                     previousTestSectionId = testSectionId;
-                    test.testSections.add(testSection);
                     previousQuestionId = -1; //reset
                 }
 
                 int questionId = resultSet.getInt(Test.QUESTION_ID);
-                if (previousQuestionId != questionId  && questionId != 0) {
-                    question = Question.createQuestionForTest(resultSet);
+                if (previousQuestionId != questionId && questionId != 0) {
+                    question = Question.createQuestionWithAnswersForTest(resultSet);
                     testSection.questions.add(question);
                     previousQuestionId = questionId;
                 }
+
+                int answerId = resultSet.getInt(Test.ANSWER_ID);
+                if (answerId != 0) {
+                    question.answers.add(Answer.createAnswerForTest(resultSet));
+                }
             }
-            result = JacksonParser.getInstance().toJson(list);
         } catch (SQLException e) {
             e.printStackTrace();
         }

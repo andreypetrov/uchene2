@@ -4,7 +4,7 @@ import com.petrovdevelopment.uchene.db.DatabaseManager;
 import com.petrovdevelopment.uchene.db.JacksonParser;
 import com.petrovdevelopment.uchene.db.Queries;
 import com.petrovdevelopment.uchene.db.converters.ResultSetConverterToModel;
-import com.petrovdevelopment.uchene.db.converters.ResultSetConverterToString;
+import com.petrovdevelopment.uchene.db.converters.ResultSetConverterToModelList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class Question extends Model {
     public List<Answer> answers;
 
 
-    public static Question createQuestionWithCorrectAnswerRevealed(ResultSet resultSet) throws  SQLException {
+    public static Question createQuestionWithCorrectAnswerRevealed(ResultSet resultSet) throws SQLException {
         Question question = new Question();
         question.id = resultSet.getInt(ID);
         question.description = resultSet.getString(DESCRIPTION);
@@ -45,7 +45,7 @@ public class Question extends Model {
     }
 
 
-    public static Question createQuestionForTest(ResultSet resultSet) throws  SQLException {
+    public static Question createQuestionForTest(ResultSet resultSet) throws SQLException {
         Question question = new Question();
         question.id = resultSet.getInt(Test.QUESTION_ID);
         question.description = resultSet.getString(Test.QUESTION_DESCRIPTION);
@@ -65,19 +65,17 @@ public class Question extends Model {
         return question;
     }
 
-    public static String getAll() {
+    public static List<Question> getAll() {
         final String query = Queries.SELECT_ALL_FROM_PREFIX + TABLE;
-        return DatabaseManager.select(query, new ResultSetConverterToString() {
+        return DatabaseManager.select(query, new ResultSetConverterToModelList<Question>() {
             @Override
-            public String convert(ResultSet resultSet) throws SQLException {
-                String result = null;
-                List<Question> list = new ArrayList<Question>();
+            public List<Question> convert(ResultSet resultSet) throws SQLException {
+                List<Question> result = new ArrayList<Question>();
                 try {
                     while (resultSet.next()) {
                         Question question = createQuestionWithCorrectAnswerRevealed(resultSet);
-                        list.add(question);
+                        result.add(question);
                     }
-                    result = JacksonParser.getInstance().toJson(list);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -103,7 +101,6 @@ public class Question extends Model {
         Question question = getById(questionId);
         return question.correctAnswerId == answerId;
     }
-
 
 
 }

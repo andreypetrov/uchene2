@@ -1,5 +1,9 @@
 package com.petrovdevelopment.uchene.model;
 
+import com.petrovdevelopment.uchene.db.DatabaseManager;
+import com.petrovdevelopment.uchene.db.converters.AllTestsWithSubsectionsConverterToModelList;
+import com.petrovdevelopment.uchene.db.converters.OneTestWithAnswersConverterToModel;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -101,5 +105,14 @@ public class Test extends Model {
         id = resultSet.getInt(Test.ID);
         description = resultSet.getString(Test.DESCRIPTION);
         testSections = new ArrayList<TestSection>();
+    }
+
+    public static Test getAllWithAnswers(int studentId, int testId) {
+        int[] inputParameters = {studentId, testId};
+        return DatabaseManager.selectWithParameters(Test.SELECT_TEST_WITH_ANSWERS, inputParameters, new OneTestWithAnswersConverterToModel());
+    }
+
+    public static List<Test> getAll() {
+        return DatabaseManager.select(Test.SELECT_ALL_TESTS, new AllTestsWithSubsectionsConverterToModelList());
     }
 }

@@ -2,10 +2,8 @@ package com.petrovdevelopment.uchene.model;
 
 import com.petrovdevelopment.uchene.db.DatabaseManager;
 import com.petrovdevelopment.uchene.db.Queries;
-import com.petrovdevelopment.uchene.db.converters.ResultSetConverterToString;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
