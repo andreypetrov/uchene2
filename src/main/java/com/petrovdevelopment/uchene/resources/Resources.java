@@ -83,7 +83,7 @@ public class Resources {
         if (testId != 0 && studentId != 0) {
             Test test = Test.getAllWithAnswers(studentId, testId);
             if (maxAnswers != 0) {
-                test.filterAnswersCountAndShuffleAnswers(maxAnswers);
+                test.filterAndShuffleAnswers(maxAnswers);
             }
             return test.toString();
         } else {

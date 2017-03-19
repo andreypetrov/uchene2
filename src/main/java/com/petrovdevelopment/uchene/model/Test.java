@@ -117,7 +117,7 @@ public class Test extends Model {
         return DatabaseManager.select(Test.SELECT_ALL_TESTS, new AllTestsWithSubsectionsConverterToModelList());
     }
 
-    public void filterAnswersCountAndShuffleAnswers(int maxAnswers) {
+    public void filterAndShuffleAnswers(int maxAnswers) {
         for (TestSection testSection : testSections) {
             for (Question question : testSection.questions) {
                 if (question.answers.size() > maxAnswers) {
