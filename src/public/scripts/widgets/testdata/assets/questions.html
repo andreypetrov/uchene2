@@ -29,9 +29,12 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="correct-question" iterate="answers">
-                                    <span>{{ id }} : </span>{{ description }}
+                                <div iterate="answers">
+                                    <div class="{{ answerClass }}" >
+                                        <span>{{ id }} : </span>{{ description }}
+                                    </div>
                                 </div>
+
                             </td>
                         </tr>
 

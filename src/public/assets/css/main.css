@@ -1566,11 +1566,19 @@ canvas{
     padding: 15px;
 }
 
-.questions-container .correct-question {
+.questions-container .correct-answer {
     background: #b9e8bf;
     padding: 5px 10px;
     border-radius: 3px;
     border: 1px solid #35b315;
+    margin-bottom: 5px;
+}
+
+.questions-container .answer {
+    background: #e6e5e5;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid #b5b4b4;
     margin-bottom: 5px;
 }
 

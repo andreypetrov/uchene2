@@ -22,6 +22,13 @@ Backbone.widget({
                         if(question.imageUrl){
                             question.imageUrl = 'assets/img/signs/' + question.imageUrl;
                         }
+                        _.each(question.answers, function(answer){
+                            if(question.correctAnswerId == answer.id){
+                                answer.answerClass = 'correct-answer'
+                            }else{
+                                answer.answerClass = 'answer'
+                            }
+                        })
                     })
                 })
 
