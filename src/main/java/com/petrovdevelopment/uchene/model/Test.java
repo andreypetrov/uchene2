@@ -17,6 +17,7 @@ public class Test extends Model {
                     "ts.description TEST_SECTION_DESCRIPTION, " +
                     "q.id QUESTION_ID, " +
                     "q.description QUESTION_DESCRIPTION, " +
+                    "q.correct_answer_id QUESTION_CORRECT_ANSWER_ID, " +
                     "q.IMAGE_URL QUESTION_IMAGE_URL, " +
                     "a.id ANSWER_ID, " +
                     "a.description ANSWER_DESCRIPTION, " +
@@ -50,6 +51,7 @@ public class Test extends Model {
                     "ts.description TEST_SECTION_DESCRIPTION, " +
                     "q.id QUESTION_ID, " +
                     "q.description QUESTION_DESCRIPTION, " +
+                    "q.correct_answer_id QUESTION_CORRECT_ANSWER_ID, " +
                     "q.IMAGE_URL QUESTION_IMAGE_URL, " +
                     "a.id ANSWER_ID, " +
                     "a.description ANSWER_DESCRIPTION, " +
@@ -75,6 +77,7 @@ public class Test extends Model {
     public static final String  QUESTION_ID = "QUESTION_ID";
     public static final String  QUESTION_DESCRIPTION = "QUESTION_DESCRIPTION";
     public static final String  QUESTION_IMAGE_URL = "QUESTION_IMAGE_URL";
+    public static final String  QUESTION_CORRECT_ANSWER_ID = "QUESTION_CORRECT_ANSWER_ID";
     public static final String  ANSWER_ID = "ANSWER_ID";
     public static final String  ANSWER_DESCRIPTION = "ANSWER_DESCRIPTION";
     public static final String  QUESTION_CATEGORY_DESCRIPTION = "QUESTION_CATEGORY_DESCRIPTION";

@@ -51,6 +51,7 @@ public class Question extends Model {
         question.description = resultSet.getString(Test.QUESTION_DESCRIPTION);
         question.questionCategoryDescription = resultSet.getString(Test.QUESTION_CATEGORY_DESCRIPTION);
         question.imageUrl = resultSet.getString(Test.QUESTION_IMAGE_URL);
+        question.correctAnswerId = resultSet.getInt(Test.QUESTION_CORRECT_ANSWER_ID);
         return question;
     }
 
@@ -58,6 +59,7 @@ public class Question extends Model {
         Question question = createQuestionForTest(resultSet);
         question.givenAnswerId = resultSet.getInt(Test.GIVEN_ANSWER);
         question.isAnswered = question.givenAnswerId != 0;
+        question.correctAnswerId = resultSet.getInt(Test.QUESTION_CORRECT_ANSWER_ID);
         question.isCorrect = resultSet.getBoolean(Test.IS_CORRECT);
         question.answers = new ArrayList<Answer>();
         return question;
@@ -87,7 +89,6 @@ public class Question extends Model {
     public static Question getById(int questionId) {
         final String query = Queries.SELECT_ALL_FROM_PREFIX + TABLE + Queries.WHERE_ID_SUFFIX;
         int[] idArray = {questionId};
-
         return (Question) DatabaseManager.selectWithParameters(query, idArray, new ResultSetConverterToModel() {
             @Override
             public Model convertToModel(ResultSet resultSet) throws SQLException {

@@ -90,7 +90,7 @@ public class Resources {
 
 
     @GET
-    @Path("answer")
+    @Path("giveAnswer")
     @Produces(MediaType.APPLICATION_JSON)
     public String answer(@QueryParam("testId") int testId,
                              @QueryParam("studentId") int studentId,
@@ -104,7 +104,6 @@ public class Resources {
         }
 
     }
-
 
     @GET
     @Path("questions")
