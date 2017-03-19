@@ -7,6 +7,7 @@ import com.petrovdevelopment.uchene.db.converters.OneTestWithAnswersConverterToM
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -114,5 +115,33 @@ public class Test extends Model {
 
     public static List<Test> getAll() {
         return DatabaseManager.select(Test.SELECT_ALL_TESTS, new AllTestsWithSubsectionsConverterToModelList());
+    }
+
+    public void filterAnswersCountAndShuffleAnswers(int maxAnswers) {
+        for (TestSection testSection : testSections) {
+            for (Question question : testSection.questions) {
+                if (question.answers.size() > maxAnswers) {
+                    List<Answer> filteredAnswers = new ArrayList<Answer>();
+
+                    //copy the correct answer
+                    for (Answer answer : question.answers) {
+                        if (answer.id == question.correctAnswerId) {
+                            filteredAnswers.add(answer);
+                        }
+                    }
+                    question.answers.remove(filteredAnswers.get(0));
+
+                    //shuffle the incorrect answers left in the array
+                    Collections.shuffle(question.answers);
+                    //add the extra incorrect answers (1 incorrect + all correct = maxAnswers or less)
+                    for (int i = 0; i<maxAnswers-1 && i < question.answers.size(); i++) {
+                        filteredAnswers.add(question.answers.get(i));
+                    }
+
+                    //assign back
+                    question.answers = filteredAnswers;
+                }
+            }
+        }
     }
 }
