@@ -77,9 +77,15 @@ public class Resources {
     @Path("tests")
     @Produces(MediaType.APPLICATION_JSON)
     public String getTests(@QueryParam("testId") int testId,
-                           @QueryParam("studentId") int studentId) {
+                           @QueryParam("studentId") int studentId,
+                           @QueryParam("maxAnswers") int maxAnswers) {
+
         if (testId != 0 && studentId != 0) {
-            return Test.getAllWithAnswers(studentId, testId).toString();
+            Test test = Test.getAllWithAnswers(studentId, testId);
+            if (maxAnswers != 0) {
+                test.filterAnswersCountAndShuffleAnswers(maxAnswers);
+            }
+            return test.toString();
         } else {
             return stringify(Test.getAll());
         }
