@@ -1,6 +1,7 @@
 package com.petrovdevelopment.uchene.db.converters;
 
 import com.petrovdevelopment.uchene.db.JacksonParser;
+import com.petrovdevelopment.uchene.model.Answer;
 import com.petrovdevelopment.uchene.model.Question;
 import com.petrovdevelopment.uchene.model.Test;
 import com.petrovdevelopment.uchene.model.TestSection;
@@ -52,6 +53,11 @@ public class AllTestsWithSubsectionsConverterToModelList implements ResultSetCon
                     question = Question.createQuestionForTest(resultSet);
                     testSection.questions.add(question);
                     previousQuestionId = questionId;
+                }
+
+                int answerId = resultSet.getInt(Test.ANSWER_ID);
+                if (answerId != 0) {
+                    question.answers.add(Answer.createAnswerForTest(resultSet));
                 }
             }
         } catch (SQLException e) {
