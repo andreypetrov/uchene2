@@ -35,12 +35,16 @@ Backbone.widget({
     },
 
     positionPlayer: function(data){
+        console.log('positionPlayer')
+
+        this.model = data;
         this.questions = data.questions;
         this.mapMode = false;
         this.render();
     },
 
     setPlayerPosition: function (data) {
+        console.log('setPlayerPosition')
         var startPoint = _.findWhere(this.startPoints, {x: data.x, y: data.y});
         this.testIndex = this.startPoints.indexOf(startPoint) + 1;
         this.questions = _.findWhere(this.model.testSections, {id: this.testIndex}).questions;
@@ -48,6 +52,7 @@ Backbone.widget({
     },
 
     setQuestions: function (data) {
+        console.log('setQuestions')
         this.model = data;
         this.mapMode = false;
     },
@@ -79,10 +84,10 @@ Backbone.widget({
     },
 
     startQuestions: function (data) {
-        console.log(data);
+        this.model = data;
         $('#bot-container').hide();
         $('.move-arrow').remove();
-        this.questions = _.findWhere(data.testSections, {id: 4});
+        this.questions = _.findWhere(data.testSections, {id: 8}).questions;
         //this.shuffle(this.questions);
         this.render(true);
     },
@@ -94,7 +99,7 @@ Backbone.widget({
         this.renderTemplate({
 
             template: 'questions',
-            data: this.model,
+            data: this.questions[this.counter],
             renderCallback: function () {
                 if(playMap){
                     this.renderQuestion(this.counter);
@@ -155,19 +160,19 @@ Backbone.widget({
         this.renderTemplate({
 
             template: 'answer',
-            data: {answers: this.questions.questions[counter].answers},
+            data: {answers: this.questions[counter].answers},
             el: '.possible-answers',
             append: true,
             renderCallback: function () {
                 var context = this;
                 this.$el.find('.possible-answers').find('input').first().prop('checked', true);
                 console.log(counter)
-                this.currentQuestion = context.questions.questions[counter];
-                context.highlightBuilding(context.questions.questions[counter]);
-                context.counter++;
+                this.currentQuestion = context.questions[counter];
+                context.highlightBuilding(context.questions[counter]);
                 this.$el.find('.questions').animate({
                     opacity: 1,
                 }, 500, function () {
+                    context.$el.find('#confirm-answer').removeClass('disabled');
 
                 });
 
@@ -196,29 +201,58 @@ Backbone.widget({
         return Math.floor(Math.random() * ( 1 + top - bottom )) + bottom;
     },
 
-    confirmAnswer: function () {
+    submitAnswer: function(playerId, questionId, answerId){
 
-        if(this.mapMode == false){
-            this.$el.fadeOut();
-            this.fire('ANSWER_GIVEN')
-            return;
-        }
+        this.$el.find('#confirm-answer').addClass('disabled');
+        this.ajaxRequest({
+            url: 'rest/giveAnswer?testId=1&studentId=' + playerId + '&questionId=' + questionId + '&answerId=' + answerId,
+            data: {},
+            type: "POST",
+            success: function (response) {
+                console.log(response)
 
-        if (this.counter == this.questions.length) {
-            $('.fog').hide();
-            return;
-        }
-        var selectedId = this.$el.find('.possible-answers').find('input:checked').attr('id');
-        var selectedAnswer = _.findWhere(this.possibleAnswers, {id: selectedId});
 
-        console.log(this.currentQuestion, selectedId);
+                if(this.mapMode == false){
+                    this.$el.fadeOut();
+                    this.fire('ANSWER_GIVEN')
 
-        var context = this;
-        $('.questions').animate({
-            opacity: 0,
-        }, 500, function () {
-            context.renderQuestion(context.counter);
+                }else{
+                    if (this.counter == this.questions.length - 1) {
+                        $('.fog').hide();
+                        this.$el.fadeOut();
+                        this.$el.find('#confirm-answer').removeClass('disabled');
+                        this.fire('SHOW_RESULT');
+
+                        return;
+                    }
+
+                    console.log(this.currentQuestion, answerId);
+
+                    var context = this;
+                    $('.questions').animate({
+                        opacity: 0,
+                    }, 200, function () {
+                        context.counter++;
+
+                        context.renderQuestion(context.counter);
+                    });
+
+                }
+
+
+
+            }
         });
+    },
+
+    confirmAnswer: function () {
+        var questionId = this.questions[this.counter].id,
+            answerId = this.$el.find('.possible-answers').find('input:checked').attr('id'),
+            playerId = this.model.playerData.id;
+
+
+            this.submitAnswer(playerId, questionId, answerId);
+
 
     }
 

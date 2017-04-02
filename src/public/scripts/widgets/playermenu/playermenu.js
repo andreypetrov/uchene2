@@ -23,6 +23,7 @@ Backbone.widget({
 
     listen: {
         'START_GAME': 'render',
+        'SHOW_RESULT': 'showResult',
         'SEND_MATRIX_DATA': 'setMapData'
 
     },
@@ -41,8 +42,10 @@ Backbone.widget({
             data: this.model.playerData,
             renderCallback: function () {
                 this.$el.find(".base-container").draggable();
-                if(this.model.answeredQuestionsLength < 1){
+                if(this.model.playerData.answeredQuestionsLength < 7){
                     this.playMap();
+                    this.$el.find('.start-points-container').hide()
+                    console.log('play map')
                 }else{
                     this.showResult();
                 }
@@ -80,7 +83,7 @@ Backbone.widget({
             context.$el.find('.play-map').fadeIn('fast');
     },
     showResult: function(){
-
+        this.$el.find('.start-points-container').show()
         // Check if position is finished
         for(var i = 0; i < this.startPoints.length; i++){
             if(this.model.testSections[i]){
@@ -88,7 +91,7 @@ Backbone.widget({
                 if(this.routes[i].steps > answeredQuestionsLength && answeredQuestionsLength > 0 && this.model.testSections[i].id != 4 ){
                     console.log('not finished')
 
-                    this.fire('POSITION_PLAYER', {x: this.startPoints[i].x, y: this.startPoints[i].y, answered: answeredQuestionsLength, questions: this.model.testSections[i].questions});
+                    this.fire('POSITION_PLAYER', {x: this.startPoints[i].x, y: this.startPoints[i].y, answered: answeredQuestionsLength, questions: this.model.testSections[i].questions, playerData: this.model.playerData});
 
                 }
             }

@@ -33,8 +33,8 @@ Backbone.widget({
         console.log(data)
 
         this.ajaxRequest({
-            url: 'webservices/testForAGivenStudent.json',
-            data: {},
+            url: 'rest/tests?testId=1',
+            data: {studentId: data.playerData.id},
             type: "GET",
             success: function (response) {
                 this.prepareData(response);
@@ -42,6 +42,8 @@ Backbone.widget({
 
             }
         });
+
+
     },
 
     prepareData: function (response) {
@@ -67,6 +69,7 @@ Backbone.widget({
             }
             response.testSections[i].percentageColor = this.getPercentageColor(response.testSections[i].percentage)
 
+            response.testSections[i].percentage = response.testSections[i].percentage.toString().substring(0, 2);
 
             for (var j = 0; j < response.testSections[i].questions.length; j++) {
                 var question = response.testSections[i].questions[j];
@@ -100,6 +103,7 @@ Backbone.widget({
         }
         response.percentageColor = this.getPercentageColor(response.overallPercentage)
 
+        response.overallPercentage = response.overallPercentage.toString().substring(0, 2);
         this.model = response;
 
     },

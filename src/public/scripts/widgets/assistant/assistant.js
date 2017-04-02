@@ -283,7 +283,6 @@ Backbone.widget({
 
         _.each(this.path, function (step, index) {
             var $road = $('.road[x='+ step.x +'][y=' + step.y +']');
-            console.log(step)
 
             var orientation = this.defineOrientation(step, this.path[index+1]);
 

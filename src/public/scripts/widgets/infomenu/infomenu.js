@@ -150,7 +150,7 @@ Backbone.widget({
     displaySpecialPoint: function(specialPoint){
         this.fire('HIGHLIGHT_OBJECT', specialPoint)
         var context = this;
-        $('.info-text-container').css('visibility', 'visible')
+        this.$el.find('.info-text-container').css('visibility', 'visible')
         this.$el.find('.info-text').text(specialPoint.info);
         this.$el.find('.info-text').fadeIn()
             $('#confirm-point').show()
@@ -179,7 +179,7 @@ Backbone.widget({
         }
         this.fire('MOVE_TO_NEXT_POINT');
         this.$el.find('.confirm-point').hide()
-        $('.info-text-container').css('visibility', 'hidden')
+        this.$el.find('.info-text-container').css('visibility', 'hidden')
     }
 
 
