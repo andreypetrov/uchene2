@@ -12,6 +12,7 @@ import com.petrovdevelopment.uchene.model.nondbmodels.UserResults;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -69,15 +70,19 @@ public class Resources {
     @GET
     @Path("users")
     @Produces(JSON_UTF)
-    public String getUsers() {
+    @ApiOperation(value = "Returns a list of all users and their roles",
+            response = User.class,
+            responseContainer = "List")
+    public String users() {
         return stringify(User.getAll());
     }
+
 
     @GET
     @Path("tests")
     @Produces(JSON_UTF)
-    @ApiOperation(value = "Returns a list of all tests, or if a testId is specified then only a single test",
-            notes = "Either a single test or list of tests",
+    @ApiOperation(value = "Returns a list of all tests, or if a testId and stundentId is specified then only a single test",
+            notes = "Either a single test or a list of all tests",
             response = Test.class,
             responseContainer = "List")
     public String getTests(@QueryParam("testId") int testId,
@@ -104,7 +109,10 @@ public class Resources {
     @GET
     @Path("questions")
     @Produces(JSON_UTF)
-    public String answer(@QueryParam("questionId") int questionId) {
+    @ApiOperation(value = "Returns a list of all questions or a single question if questionId is specified",
+            response = Question.class,
+            responseContainer = "List")
+    public String questions(@QueryParam("questionId") int questionId) {
         if (questionId != 0) {
             return Question.getById(questionId).toString();
         } else {
@@ -115,7 +123,10 @@ public class Resources {
     @GET
     @Path("results")
     @Produces(JSON_UTF)
-    public String answer(@QueryParam("testId") int testId,
+    @ApiOperation(value = "Returns a list of all student results for a given test or for one student if studentId is specified",
+            response = UserResults.class,
+            responseContainer = "List")
+    public String results(@NotNull @QueryParam("testId") int testId,
                          @QueryParam("studentId") int studentId) {
         if (testId == 0) return "Please specify test id";
 
@@ -130,10 +141,13 @@ public class Resources {
     @GET
     @Path("giveAnswer")
     @Produces(JSON_UTF)
-    public String answer(@QueryParam("testId") int testId,
-                         @QueryParam("studentId") int studentId,
-                         @QueryParam("questionId") int questionId,
-                         @QueryParam("answerId") int answerId) {
+    @ApiOperation(value = "Answer a question. Returns 1 if success and -1 in case of failure",
+            notes = "This GET method is given only for testing convenience. In your app use the POST version of it",
+            response = Integer.class)
+    public String answer(@NotNull @QueryParam("testId") int testId,
+                         @NotNull @QueryParam("studentId") int studentId,
+                         @NotNull @QueryParam("questionId") int questionId,
+                         @NotNull @QueryParam("answerId") int answerId) {
         if (testId != 0 && studentId != 0 && questionId != 0 && answerId != 0) {
             int result = TestResultAnswersFacts.insert(testId, studentId, questionId, answerId);
             return String.valueOf(result);
@@ -145,10 +159,12 @@ public class Resources {
     @POST
     @Path("giveAnswer")
     @Produces(JSON_UTF)
-    public String answerPost(@QueryParam("testId") int testId,
-                             @QueryParam("studentId") int studentId,
-                             @QueryParam("questionId") int questionId,
-                             @QueryParam("answerId") int answerId) {
+    @ApiOperation(value = "Answer a question. Returns 1 if success and -1 in case of failure",
+            response = Integer.class)
+    public String answerPost(@NotNull @QueryParam("testId") int testId,
+                             @NotNull @QueryParam("studentId") int studentId,
+                             @NotNull @QueryParam("questionId") int questionId,
+                             @NotNull @QueryParam("answerId") int answerId) {
         return answer(testId, studentId, questionId, answerId);
     }
 }
