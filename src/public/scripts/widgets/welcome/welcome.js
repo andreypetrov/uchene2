@@ -24,12 +24,12 @@ Backbone.widget({
 
         this.ajaxRequest({
             url: 'rest/tests?testId=1',
-            data: {studentId: this.playerData.id},
+            data: {studentId: this.playerData.id, maxAnswers:4},
             type: "GET",
             success: function (response) {
                 this.model = response;
 
-                var mapTest = _.findWhere(this.model.testSections, {id: 4});
+                var mapTest = _.findWhere(this.model.testSections, {id: 8});
                 var answeredQuestionsLength = _.where(mapTest.questions, {isAnswered: true}).length;
 
 
@@ -42,9 +42,9 @@ Backbone.widget({
                     answeredQuestionsLength: answeredQuestionsLength
                 };
 
-                if (answeredQuestionsLength == 1) {
+                if (answeredQuestionsLength == 8) {
                     console.log('>>>>',response)
-                    this.fire('START_GAME', response)
+                    this.fire('START_GAME', this.model)
                 } else {
                     this.render();
                 }
@@ -84,6 +84,8 @@ Backbone.widget({
         this.$el.find('.overlay').fadeOut(function () {
             $(this).remove()
         });
+
+        console.log('this.model', this.model)
         this.fire('START_GAME', this.model)
     }
 
