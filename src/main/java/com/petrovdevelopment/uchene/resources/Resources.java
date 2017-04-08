@@ -15,8 +15,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/")
-@Api(value = "/", description = "Operations about exams")
+@Path("/rest")
+@Api(value = "/rest", description = "Operations for tests")
 public class Resources {
     public static final String JSON_UTF = MediaType.APPLICATION_JSON + "; charset=UTF-8";
 
