@@ -10,6 +10,7 @@ import com.petrovdevelopment.uchene.model.TestResultAnswersFacts;
 import com.petrovdevelopment.uchene.model.User;
 import com.petrovdevelopment.uchene.model.nondbmodels.UserResults;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -75,6 +76,10 @@ public class Resources {
     @GET
     @Path("tests")
     @Produces(JSON_UTF)
+    @ApiOperation(value = "Returns a list of all tests, or if a testId is specified then only a single test",
+            notes = "Either a single test or list of tests",
+            response = Test.class,
+            responseContainer = "List")
     public String getTests(@QueryParam("testId") int testId,
                            @QueryParam("studentId") int studentId,
                            @QueryParam("maxAnswers") int maxAnswers,
