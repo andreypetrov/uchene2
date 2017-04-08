@@ -1,6 +1,8 @@
 package com.petrovdevelopment.uchene;
 
 import com.petrovdevelopment.uchene.resources.Resources;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.jaxrs.config.DefaultJaxrsConfig;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandler;
@@ -49,14 +51,23 @@ public class JettyManager {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         ServletHolder jerseyServlet = context.addServlet(
-                org.glassfish.jersey.servlet.ServletContainer.class, "/*");
+                org.glassfish.jersey.servlet.ServletContainer.class, "/rest/*");
         jerseyServlet.setInitOrder(0);
 
         // Tells the Jersey Servlet which REST service/class to load.
         jerseyServlet.setInitParameter(
                 "jersey.config.server.provider.classnames",
                 Resources.class.getCanonicalName());
+
+        // Setup Swagger
+        jerseyServlet.setInitParameter("jersey.config.server.provider.packages", "io.swagger.jaxrs.json;io.swagger.jaxrs.listing");
+
+        ServletHolder swaggerServlet = context.addServlet(DefaultJaxrsConfig.class, "/swagger-core");
+        swaggerServlet.setInitOrder(1);
+        swaggerServlet.setInitParameter("api.version", "1.0.0");
+
         return context;
     }
+
 
 }

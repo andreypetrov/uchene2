@@ -6,6 +6,8 @@ package com.petrovdevelopment.uchene;
  */
 import com.petrovdevelopment.uchene.db.DatabaseManager;
 import com.petrovdevelopment.uchene.db.JacksonParser;
+import com.petrovdevelopment.uchene.resources.Resources;
+import io.swagger.jaxrs.config.BeanConfig;
 
 public class App {
     public static void main(String[] args) throws Exception {

@@ -9,12 +9,14 @@ import com.petrovdevelopment.uchene.model.Test;
 import com.petrovdevelopment.uchene.model.TestResultAnswersFacts;
 import com.petrovdevelopment.uchene.model.User;
 import com.petrovdevelopment.uchene.model.nondbmodels.UserResults;
+import io.swagger.annotations.Api;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/rest")
+@Path("/")
+@Api(value = "/", description = "Operations about exams")
 public class Resources {
     public static final String JSON_UTF = MediaType.APPLICATION_JSON + "; charset=UTF-8";
 
