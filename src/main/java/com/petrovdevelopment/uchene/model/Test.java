@@ -117,7 +117,15 @@ public class Test extends Model {
         return DatabaseManager.select(Test.SELECT_ALL_TESTS, new AllTestsWithSubsectionsConverterToModelList());
     }
 
-    public void filterAndShuffleAnswers(int maxAnswers) {
+    public void shuffleAnswers  () {
+        for (TestSection testSection : testSections) {
+            for (Question question : testSection.questions) {
+                Collections.shuffle(question.answers);
+            }
+        }
+    }
+
+    public void filterAnswers(int maxAnswers) {
         for (TestSection testSection : testSections) {
             for (Question question : testSection.questions) {
                 if (question.answers.size() > maxAnswers) {
@@ -131,8 +139,6 @@ public class Test extends Model {
                     }
                     question.answers.remove(filteredAnswers.get(0));
 
-                    //shuffle the incorrect answers left in the array
-                    Collections.shuffle(question.answers);
                     //add the extra incorrect answers (1 incorrect + all correct = maxAnswers or less)
                     for (int i = 0; i<maxAnswers-1 && i < question.answers.size(); i++) {
                         filteredAnswers.add(question.answers.get(i));
